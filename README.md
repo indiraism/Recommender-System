@@ -108,25 +108,25 @@ Tabel 1b. _Ratings_
 
 ## Exploratory Data Analysis (EDA)
 
-![Genres](/image/genres.png)
+![genres](https://github.com/user-attachments/assets/048c7314-f522-4c5f-addd-c0df6f73f2b5)
 
 Gambar 1a. Analisis Genre
 
 Pada gambar 1a. Analisis Genre ditemukan ada 20 genre film dalam dataset. Beberapa genre yang paling banyak muncul adalah Drama, Comedy, Action, Thriller, Adventure. Ada juga kategori '(no genres listed)' yang perlu diperhatikan dalam pengolahan data selanjutnya.
 
-![Distribusi Film Berdasarkan Dekade](/image/dekade.png)
+![dekade](https://github.com/user-attachments/assets/3eb1034f-63c3-4666-8b05-e815cea93e13)
 
 Gambar 1b. Distribusi Film Berdasarkan Dekade
 
 Gambar 1b. Distribusi Film Berdasarkan Dekade tersebut menunjukkan tren pertumbuhan eksponensial dalam produksi film, terutama pada dua dekade terakhir. Perkembangan teknologi dan globalisasi industri film kemungkinan menjadi faktor utama di balik tren ini.
 
-![Outlier](/image/outlier.png)
+![outlier](https://github.com/user-attachments/assets/c116870b-df74-491d-8b86-033c99727393)
 
 Gambar 1c. Outlier 
 
 Di gambar 1c. kita dapat melihat bahwa ada _outlier_ ekstrem dan beberapa _outlier_ kecil dalam dataset, dan mereka sangat ekstrem, sehingga akan memengaruhi kinerja model. saya perlu menghilangkannya. Saya akan menghapus apa pun yang lebih tinggi dari 1000.
 
-![No Outlier](/image/nooutlier.png)
+![nooutlier](https://github.com/user-attachments/assets/4e3da080-e45b-447a-b78e-11f67a6aac13)
 
 Gambar 1d. No Outlier
 
@@ -227,7 +227,7 @@ Dalam proyek ini, metrik evaluasi yang digunakan adalah _Root Mean Squared Error
 
 RMSE adalah metrik yang umum digunakan untuk mengukur perbedaan antara nilai yang diprediksi oleh model dan nilai sebenarnya. Secara matematis, RMSE dihitung dengan rumus:
 
-![Rumus RMSE](/image/Rumus-RMSE.png)
+![Rumus-RMSE](https://github.com/user-attachments/assets/e5a01dce-bde4-4027-9e02-ff4e7b51ce79)
 
 Gambar 2. Rumus _Root Mean Squared Error_
 
