@@ -2,15 +2,15 @@
 
 ## Project Overview
 
-![Indonesia Tourism Destination]([https://blog.lancedb.com/content/images/2024/05/1_AatBvnpVpEPoQvZAMeqU-A.webp](https://www.balidiscovery.com/wp-content/uploads/2024/10/widiyanti3.jpg))
+![Indonesia Tourism Destination](https://www.balidiscovery.com/wp-content/uploads/2024/10/widiyanti3.jpg)
 
-*Sumber: [Bali Discoverye](https://www.balidiscovery.com/ri-identifies-top-5-tourism-destinations/)*
+*Sumber: [Bali Discovery](https://www.balidiscovery.com/ri-identifies-top-5-tourism-destinations/)*
 
 Sistem rekomendasi telah menjadi bagian integral dari kehidupan digital kita, membantu pengguna menavigasi lautan informasi dan pilihan yang tersedia. Dari platform _e-commerce_ hingga layanan _streaming_, sistem ini berperan penting dalam meningkatkan pengalaman pengguna dengan menyajikan konten atau produk yang relevan dan personal.
 
-Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata.[1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
+Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata. [1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
 
-Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia.[2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
+Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia. [2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
 
 
 ## Business Understanding
@@ -59,89 +59,94 @@ Keterbatasan: Cenderung merekomendasikan item yang serupa dengan apa yang sudah 
 | Tags | _Beginner, Travel, Asia, Recommender Systems_ |
 | Usability | 8.24 |
 
-Dataset ini terdiri dari empat file CSV terpisah: `tourism_rating.csv`, `user.csv`, `tourism_with_id.csv`, dan `place.csv`. Secara keseluruhan, dataset ini mencakup informasi mengenai destinasi wisata di Indonesia, data pengguna, serta _rating_ yang diberikan oleh pengguna terhadap destinasi-destinasi tersebut. Kondisi data relatif bersih dan terstruktur, namun memerlukan beberapa langkah preprocessing seperti penanganan _missing values_ dan penggabungan tabel untuk mendapatkan data yang siap dianalisis.
+Dataset yang digunakan yaitu `tourism_with_id.csv` dan `tourism_rating.csv` sebagai dataset.
 
-Deskripsi Variabel (Fitur)
-Berikut adalah uraian dari setiap variabel atau fitur yang terdapat dalam dataset:
+Berikut adalah _Exploratory Data Analysis_ (EDA) yang merupakan proses investigasi awal pada data untuk menganalisis karakteristik, menemukan pola, anomali, dan memeriksa asumsi pada data.
 
-`tourism_rating.csv`
-File ini berisi informasi mengenai _rating_ yang diberikan oleh pengguna terhadap destinasi wisata.
+- **Place**
 
-**User_Id**: ID unik untuk setiap pengguna.
-**Place_Id**: ID unik untuk setiap destinasi wisata.
-**Place_Ratings**: _Rating_ yang diberikan oleh pengguna untuk destinasi wisata tertentu.
+  **Tabel 1. Informasi Dataset tourism_with_id**
 
-`user.csv`
-File ini berisi informasi demografi pengguna.
+  | #   | Column       | Non-Null Count | Dtype   |
+  | --- | ------------ | -------------- | ------- |
+  | 0   | Place_Id     | 437 non-null   | int64   |
+  | 1   | Place_Name   | 437 non-null   | object  |
+  | 2   | Description  | 437 non-null   | object  |
+  | 3   | Category     | 437 non-null   | object  |
+  | 4   | City         | 437 non-null   | object  |
+  | 5   | Price        | 437 non-null   | int64   |
+  | 6   | Rating       | 437 non-null   | float64 |
+  | 7   | Time_Minutes | 205 non-null   | float64 |
+  | 8   | Coordinate   | 437 non-null   | object  |
+  | 9   | Lat          | 437 non-null   | float64 |
+  | 10  | Long         | 437 non-null   | float64 |
 
-**User_Id**: ID unik untuk setiap pengguna.
-**Location**: Lokasi geografis asal pengguna (misalnya, provinsi atau kota).
-**Age**: Usia pengguna.
+  tourism_with_id terdiri dari 437 baris dan 10 kolom sebagai berikut:
 
-## Exploratory Data Analysis (EDA)
+  - Place_Id: kolom yang menunjukkan id dari setiap tempat wisata.
+  - Place_Name: kolom yang menunjukkan nama dari setiap tempat wisata.
+  - Description: kolom yang menunjukkan deskripsi dari setiap tempat wisata.
+  - Category: kolom yang menunjukkan kategori dari setiap tempat wisata.
+  - City: kolom yang menunjukkan kota dimana tempat wisata tersebut berada.
+  - Price: kolom yang menunjukkan harga tiket masuk ke tempat wisata tersebut.
+  - Rating: kolom yang menunjukkan rating dari setiap tempat wisata.
+  - Time_Minutes: kolom yang menunjukkan waktu yang diperlukan untuk mengunjungi tempat wisata tersebut.
+  - Coordinate: kolom yang menunjukkan koordinat dari setiap tempat wisata.
+  - Lat: kolom yang menunjukkan latitude dari setiap tempat wisata.
+  - Long: kolom yang menunjukkan longitude dari setiap tempat wisata.
 
-![genres](https://github.com/user-attachments/assets/048c7314-f522-4c5f-addd-c0df6f73f2b5)
+Berikut adalah visualisasi dari dataset tourism_with_id:
 
-Gambar 1a. Analisis Genre
+  **Tabel 2. Sampel Dataset tourism_with_id**
 
-Pada gambar 1a. Analisis Genre ditemukan ada 20 genre film dalam dataset. Beberapa genre yang paling banyak muncul adalah Drama, Comedy, Action, Thriller, Adventure. Ada juga kategori '(no genres listed)' yang perlu diperhatikan dalam pengolahan data selanjutnya.
+  | #   | Place_Id | Place_Name                        | Category      |
+  | --- | -------- | --------------------------------- | ------------- |
+  | 0   | 1        | Monumen Nasional                  | Budaya        |
+  | 1   | 2        | Kota Tua                          | Budaya        |
+  | 2   | 3        | Dunia Fantasi                     | Taman Hiburan |
+  | 3   | 4        | Taman Mini Indonesia Indah (TMII) | Taman Hiburan |
+  | 4   | 5        | Atlantis Water Adventure          | Taman Hiburan |
 
-![dekade](https://github.com/user-attachments/assets/3eb1034f-63c3-4666-8b05-e815cea93e13)
+- **Rating**
 
-Gambar 1b. Distribusi Film Berdasarkan Dekade
+  **Tabel 3. Informasi Dataset tourism_rating**
 
-Gambar 1b. Distribusi Film Berdasarkan Dekade tersebut menunjukkan tren pertumbuhan eksponensial dalam produksi film, terutama pada dua dekade terakhir. Perkembangan teknologi dan globalisasi industri film kemungkinan menjadi faktor utama di balik tren ini.
+  | #   | Column        | Non-Null Count | Dtype |
+  | --- | ------------- | -------------- | ----- |
+  | 0   | User_Id       | 10000 non-null | int64 |
+  | 1   | Place_Id      | 10000 non-null | int64 |
+  | 2   | Place_Ratings | 10000 non-null | int64 |
 
-![outlier](https://github.com/user-attachments/assets/c116870b-df74-491d-8b86-033c99727393)
+  tourism_rating terdiri dari 10000 baris dan 3 kolom sebagai berikut:
 
-Gambar 1c. Outlier 
+  - User_Id: identitas unik dari setiap pengguna.
+  - Place_Id: identitas unik dari setiap tempat wisata.
+  - Place_Ratings: penilaian atau rating yang diberikan oleh pengguna terhadap tempat wisata tertentu.
 
-Di gambar 1c. kita dapat melihat bahwa ada _outlier_ ekstrem dan beberapa _outlier_ kecil dalam dataset, dan mereka sangat ekstrem, sehingga akan memengaruhi kinerja model. saya perlu menghilangkannya. Saya akan menghapus apa pun yang lebih tinggi dari 1000.
+  Berikut adalah visualisasi dari dataset tourism_rating:
 
-![nooutlier](https://github.com/user-attachments/assets/4e3da080-e45b-447a-b78e-11f67a6aac13)
+  **Tabel 4. Sampel Dataset tourism_rating**
 
-Gambar 1d. No Outlier
+  | #   | User_Id | Place_Id | Place_Ratings |
+  | --- | ------- | -------- | ------------- |
+  | 0   | 1       | 179      | 3             |
+  | 1   | 1       | 344      | 2             |
+  | 2   | 1       | 5        | 5             |
+  | 3   | 1       | 373      | 3             |
+  | 4   | 1       | 101      | 4             |
 
-Data terlihat lebih baik sekarang, meski masih ada banyak _outlier_. saya akan mencoba memakainya dulu. Sebelum menggunakan data film yang sudah dibersihkan, saya akan mengubah kolom `genre` ke _one-hot encoding_ karena format _List_ (Daftar) lebih mudah untuk visualisasi, tapi kurang praktis untuk perhitungan komputer.
 
 ## Data Preparation
-Tahapan _Data Preparation_ dalam proyek ini melibatkan beberapa langkah penting untuk memastikan data siap dianalisis dan digunakan dalam model rekomendasi. Langkah-langkah ini meliputi:
+Tahap ini bertujuan untuk mempersiapkan data yang akan digunakan untuk proses training model. Di sini dilakukan penghapusan kolom yang tidak diperlukan, pembersihkan data _missing value_, dan melakukan pengecekan dan penghapusan data duplikat.
 
-1. **Data Loading**
+1. **Menghilangkan Kolom yang Tidak Relevan**
 
-- Memuat _dataset_ film dan _rating_ menggunakan _library_ Pandas.
-- Tujuannya adalah untuk membaca _dataset_ ke dalam format DataFrame yang mudah dimanipulasi dan dianalisis.
+   Untuk dataset **tourism_with_id**, hanya kolom `Place_Id`, `Place_Name`, dan `Category` yang dibutuhkan, ehingga    kolom lainnya dihapus. Sementara pada dataset **tourism_rating**, seluruh kolom diperlukan, sehingga tidak ada      kolom yang dihilangkan.
 
-2. **Exploratory Data Analysis - EDA**
+2. **Pengecekan Missing Values**
 
-- Menganalisis kolom `genres` pada _dataset_ film untuk memahami distribusi dan variasi genre film.
-- Memisahkan _string_ genre yang digabungkan menjadi list individual dan menghitung frekuensi kemunculan setiap genre.
-- Memvisualisasikan distribusi genre menggunakan _bar chart_ untuk mendapatkan gambaran jelas tentang genre mana yang paling umum.
-- Tujuannya adalah untuk memahami karakteristik data sebelum pemrosesan lebih lanjut, terutama dalam hal genre film.
+   Proses pengecekan data yang hilang atau _missing value_ dilakukan pada masing-masing dataset **tourism_with_id**    dan **tourism_rating**. Berdasarkan hasil pengecekan, ternyata tidak ada data yang hilang dari kedua dataset        tersebut.
 
-3. **Ekstraksi Fitur dari Kolom Teks**
-
-- Memproses kolom `title` untuk mengekstrak informasi tahun rilis film.
-- Memisahkan tahun dari judul film dan menyimpannya dalam kolom baru bernama `years`.
-- Tujuannya adalah untuk mengubah data tekstual menjadi data numerik yang lebih mudah diolah oleh model.
-
-4. **Konversi Data Kategorikal**
-
-- Mengubah kolom `genres` menjadi representasi `one-hot encoding`.
-- Memisahkan setiap genre dari daftar genre film dan membuat kolom biner baru untuk setiap genre.
-- Tujuannya adalah untuk mengubah data kategorikal menjadi format numerik yang sesuai untuk input model _machine learning_.
-
-5. **Penggabungan dan Pembersihan Data**
-
-- Menggabungkan _dataset_ film dan rating berdasarkan `movieId`.
-- Menghapus kolom-kolom yang tidak relevan seperti `title`, `genres`, dan `timestamp` untuk menyederhanakan dataset.
-- Tujuannya adalah untuk menyatukan informasi film dan _rating_, serta membersihkan data dari informasi yang tidak diperlukan untuk pemodelan.
-
-6. **Pembagian Data**
-
-- Membagi _dataset_ yang telah disiapkan menjadi data latih (_train_) dan data uji (_test_).
-- Pembagian ini dilakukan untuk mengevaluasi kinerja model pada data yang belum pernah dilihat sebelumnya.
-- Tujuannya adalah untuk mengukur kemampuan generalisasi model dan menghindari _overfitting_.
 
 ## Modeling
 Dalam proyek ini, digunakan algoritma _clustering_ untuk mengelompokkan pengguna berdasarkan preferensi film mereka, yang kemudian digunakan untuk memprediksi _rating_ film. Berikut adalah rincian tahapan _modeling_ yang dilakukan:
