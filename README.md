@@ -1,58 +1,49 @@
 # Laporan Proyek Machine Learning - Indira Aline
 
-## Latar Belakang
+## Project Overview
 
-![Movies Recommendation System](https://blog.lancedb.com/content/images/2024/05/1_AatBvnpVpEPoQvZAMeqU-A.webp)
+![Indonesia Tourism Destination]([https://blog.lancedb.com/content/images/2024/05/1_AatBvnpVpEPoQvZAMeqU-A.webp](https://www.balidiscovery.com/wp-content/uploads/2024/10/widiyanti3.jpg))
 
-*Sumber: [Google](https://blog.lancedb.com/content/images/2024/05/1_AatBvnpVpEPoQvZAMeqU-A.webp)*
+*Sumber: [Bali Discoverye](https://www.balidiscovery.com/ri-identifies-top-5-tourism-destinations/)*
 
-Di era digital ini, jumlah film yang tersedia sangatlah banyak dan terus bertambah. Layanan streaming film menawarkan ribuan judul, membuat penonton seringkali kesulitan menemukan film yang benar-benar sesuai dengan preferensi mereka. Hal ini mengarah pada beberapa masalah:
+Sistem rekomendasi telah menjadi bagian integral dari kehidupan digital kita, membantu pengguna menavigasi lautan informasi dan pilihan yang tersedia. Dari platform _e-commerce_ hingga layanan _streaming_, sistem ini berperan penting dalam meningkatkan pengalaman pengguna dengan menyajikan konten atau produk yang relevan dan personal.
 
-- **_Overchoice_:** Penonton kewalahan dengan banyaknya pilihan, yang dapat menyebabkan frustrasi dan kesulitan dalam membuat keputusan.
+Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata.[1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
 
-- **Waktu yang terbuang:** Penonton menghabiskan waktu yang signifikan untuk mencari film, alih-alih menikmati film itu sendiri.
-
-- **Penemuan film yang terbatas:** Penonton cenderung menonton film-film populer atau yang sudah mereka kenal, sehingga melewatkan film-film berkualitas dari genre atau negara lain yang mungkin mereka sukai.
-
-Sistem rekomendasi hadir sebagai solusi untuk mengatasi masalah-masalah ini.  Sistem rekomendasi film bertujuan untuk:
-
-- **Mempersonalisasi pengalaman menonton:** Dengan menganalisis preferensi dan perilaku pengguna, sistem dapat merekomendasikan film yang kemungkinan besar akan disukai oleh setiap individu.
-
-**Memudahkan penemuan film:** Sistem dapat membantu pengguna menemukan film-film baru yang mungkin belum mereka ketahui, memperluas cakrawala sinematik mereka.
-
-- **Meningkatkan kepuasan pengguna:** Dengan memberikan rekomendasi yang relevan, sistem dapat meningkatkan kepuasan pengguna terhadap layanan streaming film.
-
-Proyek ini akan mengembangkan sebuah sistem rekomendasi film yang menggunakan pendekatan _user clustering_ dan prediksi rating berdasarkan genre dan tahun rilis. Pendekatan ini dipilih karena memiliki beberapa keunggulan:
-
-- **_Cold start problem_:** Tidak seperti metode _collaborative filtering_ yang membutuhkan rating dari pengguna lain, pendekatan ini dapat memberikan rekomendasi bahkan kepada pengguna baru yang belum memberikan rating apapun.
-
-- **Efisiensi:** _User clustering_ memungkinkan sistem untuk membuat rekomendasi yang dipersonalisasi secara efisien, tanpa perlu membandingkan setiap pengguna dengan semua film yang tersedia.
-
-Dengan demikian, proyek ini diharapkan dapat memberikan kontribusi dalam meningkatkan pengalaman menonton film di era digital ini.
-
-Referensi:
-
-[A Movie Recommender System: MOVREC](https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=e13eb41de769f124b3c91771167fb7b01bc85559)
+Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia.[2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
 
 
 ## Business Understanding
 
 ### Problem Statements
 
-1. Bagaimana dapat secara efisien merekomendasikan film kepada pengguna tanpa bergantung pada peringkat pengguna eksplisit?
-2. Dapatkah memanfaatkan genre film dan tahun rilis untuk memprediksi preferensi pengguna dan memberikan rekomendasi yang dipersonalisasi?
-3. Bagaimana dapat mengelompokkan pengguna dengan preferensi film yang serupa untuk meningkatkan akurasi rekomendasi?
+1. Bagaimana sistem dapat merekomendasikan destinasi yang belum pernah diketahui atau dipertimbangkan oleh wisatawan, namun memiliki potensi untuk disukai?
+2. Bagaimana cara menyediakan rekomendasi destinasi wisata yang personal dan relevan bagi setiap individu berdasarkan preferensi unik mereka?
 
 ### Goals
 
-1. Mengembangkan sistem rekomendasi film yang menyarankan film berdasarkan genre dan tahun rilisnya, sehingga menghilangkan kebutuhan akan peringkat pengguna sebelumnya.
-2. Memprediksi peringkat film untuk pengguna secara akurat dengan menganalisis hubungan antara genre film, tahun rilis, dan kelompok pengguna.
-3. Mengidentifikasi kelompok pengguna yang berbeda dengan preferensi film yang serupa untuk mempersonalisasi rekomendasi dan meningkatkan akurasi prediksi.
+1. Meningkatkan _Discovery_ Destinasi Baru: Membangun sistem yang tidak hanya merekomendasikan destinasi yang sudah populer, tetapi juga mampu mengidentifikasi dan menyajikan destinasi yang kurang dikenal namun memiliki potensi tinggi untuk disukai oleh pengguna berdasarkan pola minat yang serupa dari pengguna lain atau karakteristik destinasi itu sendiri.
+2. Menyediakan Rekomendasi Destinasi Personal: Mengembangkan sistem yang mampu menganalisis data preferensi pengguna (misalnya, kategori wisata yang disukai, lokasi, _rating_ sebelumnya) dan karakteristik destinasi (misalnya, jenis wisata, fasilitas) untuk menyajikan rekomendasi yang sangat personal dan relevan bagi setiap individu.
 
     ### Solution statements
-    - **Pengelompokan Pengguna:** Menggunakan algoritma pengelompokan (_DBSCAN, Agglomerative Clustering, KMeans_) untuk mengelompokkan pengguna berdasarkan preferensi film mereka yang disimpulkan dari data film. Ini akan membantu dalam mengidentifikasi pengguna dengan selera yang sama.
-    - **Pemodelan Prediktif:** Mengembangkan model yang memprediksi peringkat film menggunakan genre film dan tahun rilis sebagai fitur. Model ini akan dilatih pada kelompok pengguna untuk menangkap preferensi kelompok tertentu dan membuat rekomendasi yang dipersonalisasi.
+Sistem rekomendasi ini akan dibangun dengan menggabungkan kekuatan dari _Collaborative Filtering_ dan _Content-Based Filtering_ untuk memberikan rekomendasi yang komprehensif dan akurat.
 
+**_Solution Approach 1: Collaborative Filtering_**
+Pendekatan ini berfokus pada hubungan antar pengguna dan antar item. Sistem akan menganalisis preferensi dan perilaku pengguna lain yang serupa dengan pengguna saat ini untuk merekomendasikan item (destinasi wisata) yang disukai oleh pengguna-pengguna serupa tersebut. Ada dua sub-pendekatan utama dalam _Collaborative Filtering_:
+
+- **_User-Based Collaborative Filtering_**: Mengidentifikasi pengguna dengan selera yang sama (misalnya, mereka memberi _rating_ serupa pada destinasi yang sama) dan merekomendasikan destinasi yang disukai oleh pengguna serupa tersebut kepada pengguna saat ini.
+- **_Item-Based Collaborative Filtering_**: Mengidentifikasi item (destinasi) yang sering disukai bersama oleh banyak pengguna dan merekomendasikan item yang mirip dengan item yang sudah disukai pengguna saat ini
+
+Keunggulan: Mampu merekomendasikan item yang belum pernah dilihat oleh pengguna (masalah _serendipity_) dan tidak memerlukan data deskriptif tentang item itu sendiri.
+
+Keterbatasan: Memerlukan data _rating_ atau interaksi pengguna yang cukup banyak (_cold start problem_ untuk pengguna baru atau item baru) dan rentan terhadap sparsity data.
+
+**_Solution Approach 2: Content-Based Filtering_**
+Pendekatan ini merekomendasikan item (destinasi wisata) berdasarkan kemiripan antara fitur-fitur item tersebut dengan preferensi pengguna. Sistem akan membangun profil pengguna berdasarkan _rating_ atau interaksi sebelumnya dengan item dan kemudian merekomendasikan item baru yang memiliki fitur serupa dengan item yang disukai pengguna di masa lalu.
+
+Keunggulan: Tidak mengalami masalah _cold start_ untuk item baru (jika ada deskripsi itemnya) dan mampu merekomendasikan item kepada pengguna baru yang belum memiliki riwayat interaksi yang banyak.
+
+Keterbatasan: Cenderung merekomendasikan item yang serupa dengan apa yang sudah disukai pengguna (_lack of diversity_) dan memerlukan data deskriptif yang kaya tentang item.
 
 ## Data Understanding
 
@@ -60,51 +51,32 @@ Referensi:
 
 | Jenis | Keterangan |
 | ------ | ------ |
-| Title | _Movie Recommendation System_ |
-| Source | [Kaggle](https://www.kaggle.com/datasets/parasharmanas/movie-recommendation-system) |
-| Maintainer | [Manas Parashar ⚡](https://www.kaggle.com/parasharmanas) |
+| Title | _Indonesia Tourism Destination_ |
+| Source | [Kaggle](https://www.kaggle.com/datasets/aprabowo/indonesia-tourism-destination) |
+| Maintainer | [A_Prabowo ⚡](https://www.kaggle.com/aprabowo) |
 | License | Other (specified in description) |
 | Visibility | Publik |
-| Tags | _Arts and Entertainment, Movies and TV Shows_ |
-| Usability | 10.00 |
+| Tags | _Beginner, Travel, Asia, Recommender Systems_ |
+| Usability | 8.24 |
 
-Berikut informasi pada dataset: 
+Dataset ini terdiri dari empat file CSV terpisah: `tourism_rating.csv`, `user.csv`, `tourism_with_id.csv`, dan `place.csv`. Secara keseluruhan, dataset ini mencakup informasi mengenai destinasi wisata di Indonesia, data pengguna, serta _rating_ yang diberikan oleh pengguna terhadap destinasi-destinasi tersebut. Kondisi data relatif bersih dan terstruktur, namun memerlukan beberapa langkah preprocessing seperti penanganan _missing values_ dan penggabungan tabel untuk mendapatkan data yang siap dianalisis.
 
-| movieId | tittle | genres |
-| ------ | ------ | ------ |
-| 1 | Toy Story (1995) | Adventure|Animation|Children|Comedy|Fantasy |
-| 2 | Jumanji (1995) | Adventure|Children|Fantasy |
-| 3 | Grumpier Old Men (1995) | Comedy|Romance |
-| 4 | Waiting to Exhale (1995) | Comedy|Drama|Romance |
-| 5 | Father of the Bride Part II (1995) | Comedy |
+Deskripsi Variabel (Fitur)
+Berikut adalah uraian dari setiap variabel atau fitur yang terdapat dalam dataset:
 
-Tabel 1a. _Movies_
+`tourism_rating.csv`
+File ini berisi informasi mengenai _rating_ yang diberikan oleh pengguna terhadap destinasi wisata.
 
-`movies.csv` berisi informasi mengenai film-film, dengan total 62.423 entri dan 3 kolom. Kondisi data pada file ini menunjukkan bahwa tidak ada nilai yang hilang (non-null count sesuai dengan jumlah entri) dan tipe data yang digunakan adalah integer untuk `movieId` dan object untuk title dan genres.
+**User_Id**: ID unik untuk setiap pengguna.
+**Place_Id**: ID unik untuk setiap destinasi wisata.
+**Place_Ratings**: _Rating_ yang diberikan oleh pengguna untuk destinasi wisata tertentu.
 
-| userId | movieId | rating | timestamp |
-| ------ | ------ | ------ | ------ |
-| 1 | 296 | 5 | 1.14788e+09 |
-| 1 | 306 | 3.5 | 1.14787e+09 |
-| 1 | 307 | 5 | 1.14787e+09 |
-| 1 | 665 | 5 | 1.14788e+09 |
-| 1 | 899 | 3.5 | 1.14787e+09 |
+`user.csv`
+File ini berisi informasi demografi pengguna.
 
-Tabel 1b. _Ratings_
-
-`ratings.csv` berisi informasi mengenai rating film, dengan total 25.000.095 entri dan 4 kolom. Kondisi data pada file ini juga menunjukkan tidak ada nilai yang hilang, dengan tipe data integer untuk userId, movieId, dan _timestamp_, serta float untuk rating.
-
-**Fitur pada Dataset**
-1. `movies.csv`
-- `movieId`: Merupakan _ID_ unik untuk setiap film.
-- `title`: Judul film, yang juga mencakup tahun rilis.
-- `genres`: Kategori atau genre film, dipisahkan dengan tanda "|".
-
-2. `rating.csv`:
-- `userId`: _ID_ unik untuk setiap pengguna.
-- `movieId`: _ID film_ yang diberi rating (berkorespondensi dengan `movieId` di file `movies.csv`).
-- `rating`: Rating yang diberikan pengguna untuk film tersebut (dalam skala numerik).
-- `_timestamp_`: _Timestamp_ yang menunjukkan waktu pemberian rating.
+**User_Id**: ID unik untuk setiap pengguna.
+**Location**: Lokasi geografis asal pengguna (misalnya, provinsi atau kota).
+**Age**: Usia pengguna.
 
 ## Exploratory Data Analysis (EDA)
 
@@ -254,4 +226,5 @@ Dengan demikian, evaluasi menggunakan RMSE memberikan validasi kuantitatif terha
 
 ## Referensi
 
-1. A Movie Recommender System: MOVREC. https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=e13eb41de769f124b3c91771167fb7b01bc85559
+1. THE DEVELOPMENT OF TOURISM INDUSTRY IN INDONESIA: CURRENT PROBLEMS AND CHALLENGES. https://citeseerx.ist.psu.edu/document?repid=rep1&type=pdf&doi=e13eb41de769f124b3c91771167fb7b01bc85559](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf
+2. THE ROLE OF TOURISM DESTINATION AND HUMAN RESOURCES IN SUSTAINABLE TOURISM IMPLEMENTATION IN INDONESIA. https://jbhost.org/jbhost/index.php/jbhost/article/view/170
