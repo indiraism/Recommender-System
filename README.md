@@ -8,9 +8,9 @@
 
 Sistem rekomendasi telah menjadi bagian integral dari kehidupan digital kita, membantu pengguna menavigasi lautan informasi dan pilihan yang tersedia. Dari platform _e-commerce_ hingga layanan _streaming_, sistem ini berperan penting dalam meningkatkan pengalaman pengguna dengan menyajikan konten atau produk yang relevan dan personal.
 
-Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata. [1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
+Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata.[1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
 
-Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia. [2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
+Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia.[2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
 
 
 ## Business Understanding
@@ -149,52 +149,30 @@ Tahap ini bertujuan untuk mempersiapkan data yang akan digunakan untuk proses tr
 
 
 ## Modeling
-Dalam proyek ini, digunakan algoritma _clustering_ untuk mengelompokkan pengguna berdasarkan preferensi film mereka, yang kemudian digunakan untuk memprediksi _rating_ film. Berikut adalah rincian tahapan _modeling_ yang dilakukan:
+Dalam pengembangan model machine learning untuk sistem rekomendasi, teknik _content-based filtering_ dan _collaborative filtering_ digunakan untuk merekomendasikan tempat terbaik kepada pengguna berdasarkan _rating_ atau penilaian yang mereka berikan. Tujuannya adalah menyajikan rekomendasi yang akurat sesuai preferensi pengguna.
 
-1. **Pembuatan Model dengan Algoritma Clustering**
+1. _Content-based Filtering Recommendation_
 
-Dua algoritma _clustering_ utama yang dieksplorasi adalah _K-Means Clustering_ dan _Agglomerative Clustering_. Algoritma ini digunakan untuk mengelompokkan pengguna ke dalam beberapa _cluster_ berdasarkan _rating_ film mereka. Tujuan dari _clustering_ adalah untuk mengidentifikasi kelompok pengguna dengan preferensi film yang serupa.
+Beberapa tahap yang dilakukan untuk membuat sistem rekomendasi dengan pendekatan _content-based filtering_ adalah _TF-IDF Vectorizer_, _cosine similarity_, dan pengujian sistem rekomendasi.
 
-2. **Pemilihan Jumlah Cluster Terbaik**
+- **_TF-IDF Vectorizer_**
 
-Eksperimen dilakukan dengan berbagai jumlah _cluster_ untuk menentukan konfigurasi yang menghasilkan kinerja terbaik. Jumlah _cluster_ yang optimal dipilih berdasarkan nilai RMSE terendah pada data uji, yang menunjukkan prediksi _rating_ yang paling akurat.
+_TF-IDF Vectorizer_ akan melakukan transformasi teks nama tempat menjadi bentuk angka berupa matriks.
 
-3. **Rekomendasi Top-N**
+- **_Cosine Similarity_**
 
-Setelah model _clustering_ dilatih dan dievaluasi, model digunakan untuk menghasilkan rekomendasi _top-N_ film untuk setiap pengguna.
-Rekomendasi _top-N_ adalah daftar _N_ film teratas yang diprediksi akan disukai oleh pengguna, berdasarkan _cluster_ mereka dan _rating_ rata-rata film dalam _cluster_ tersebut. Output dari tahapan ini adalah daftar film yang direkomendasikan untuk setiap pengguna.
+_Cosine similarity_ adalah metode untuk mengukur kemiripan antara dua data place dengan mengevaluasi sudut di antara keduanya. Teknik ini menentukan tingkat kesamaan berdasarkan sudut antara data _place_ yang dibandingkan. Hasil perhitungannya menghasilkan nilai yang mencerminkan tingkat kemiripan, di mana nilai mendekati 1 menandakan kemiripan yang kuat, sedangkan nilai mendekati 0 menunjukkan kemiripan yang lemah.
 
-**Dua Solusi Rekomendasi dengan Algoritma yang Berbeda**
+- **Hasil _Top-N Recommendation_**
 
-Dalam proyek ini, dua algoritma _clustering_ dieksplorasi sebagai solusi rekomendasi:
+Dengan menerapkan _TF-IDF Vectorizer_ untuk mengonversi data objek wisata ke dalam bentuk matriks dan mengukur kesamaan antar tempat menggunakan _cosine similarity_, pengujian sistem rekomendasi _content-based filtering_ dilakukan. Hasil evaluasinya adalah seperti berikut:
 
-1. **_K-Means Clustering_**
-Algoritma ini membagi pengguna ke dalam k _cluster_, di mana setiap pengguna termasuk dalam _cluster_ dengan rata-rata terdekat.
+Diambil sebuah nama tempat yang dipilih oleh pengguna.
 
-- Kelebihan:
-
-    - Skalabilitas: _K-Means_ efisien dalam menangani _dataset_ besar.
-    - Implementasi yang Mudah: Relatif mudah diimplementasikan dan dipahami.
-
-- Kekurangan:
-
-    - Sensitif terhadap Inisialisasi: Hasil dapat bervariasi tergantung pada pemilihan centroid awal.
-    - Asumsi _Cluster_ Berbentuk Bulat: Kurang efektif jika _cluster_ memiliki bentuk yang kompleks atau non-bulat.
-
-2. **_Agglomerative Clustering_**
-Algoritma ini membangun hierarki _cluster_ dengan menggabungkan _cluster-cluster_ yang paling mirip secara iteratif.
-
-- Kelebihan:
-
-    - Tidak Membutuhkan Spesifikasi Jumlah _Cluster_ Awal: Jumlah _cluster_ dapat ditentukan secara dinamis.
-    - Informasi Hierarkis: Menyediakan struktur hierarkis yang kaya tentang hubungan antar data.
-
-- Kekurangan:
-
-    - Komputasi yang Mahal: Bisa menjadi sangat lambat untuk _dataset_ besar.
-    - Sensitif terhadap _Noise_: _Noise_ dalam data dapat memengaruhi pembentukan _cluster_.
-
-Kedua algoritma ini memiliki kelebihan dan kekurangan masing-masing. Pemilihan algoritma yang tepat tergantung pada karakteristik data dan kebutuhan spesifik proyek. Dalam _notebook_, kedua algoritma dievaluasi dan dibandingkan untuk menentukan solusi terbaik untuk sistem rekomendasi film.
+ **Tabel 5. Nama Tempat yang Dipilih Pengguna**
+  | Place_Id | Place_Name | Category |
+  | -------- | ---------- | ----------- |
+  | 1 | Monumen Nasional | Budaya |
 
 ## Evaluation
 
