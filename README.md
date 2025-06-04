@@ -8,9 +8,9 @@
 
 Sistem rekomendasi telah menjadi bagian integral dari kehidupan digital kita, membantu pengguna menavigasi lautan informasi dan pilihan yang tersedia. Dari platform _e-commerce_ hingga layanan _streaming_, sistem ini berperan penting dalam meningkatkan pengalaman pengguna dengan menyajikan konten atau produk yang relevan dan personal.
 
-Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata.[1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
+Indonesia, dengan kekayaan budaya dan keindahan alamnya, menawarkan beragam destinasi wisata yang menarik. Namun, bagi wisatawan, baik domestik maupun mancanegara, menemukan destinasi yang sesuai dengan preferensi pribadi bisa menjadi tantangan. Informasi yang tersebar, pilihan yang melimpah, dan kurangnya rekomendasi yang dipersonalisasi seringkali menyulitkan proses perencanaan perjalanan. Tanpa panduan yang efektif, wisatawan mungkin melewatkan permata tersembunyi atau menghabiskan waktu pada destinasi yang tidak sesuai dengan minat mereka, yang pada akhirnya dapat mengurangi kepuasan pengalaman berwisata. [1](https://www.idpublications.org/wp-content/uploads/2017/01/Full-Paper-THE-DEVELOPMENT-OF-TOURISM-INDUSTRY-IN-INDONESIA.pdf)
 
-Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia.[2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
+Masalah ini dapat diselesaikan melalui pengembangan sistem rekomendasi destinasi wisata yang cerdas. Sistem ini akan menganalisis preferensi pengguna dan karakteristik destinasi untuk menyajikan rekomendasi yang paling relevan. Pendekatan ini tidak hanya akan mempermudah wisatawan dalam menemukan tempat-tempat menarik, tetapi juga akan berkontribusi pada peningkatan jumlah kunjungan ke berbagai destinasi wisata di Indonesia. [2](https://jbhost.org/jbhost/index.php/jbhost/article/view/170)
 
 
 ## Business Understanding
@@ -173,39 +173,86 @@ Diambil sebuah nama tempat yang dipilih oleh pengguna.
   | Place_Id | Place_Name | Category |
   | -------- | ---------- | ----------- |
   | 1 | Monumen Nasional | Budaya |
+  | 2 | Kota Tua | Budaya |
+  | 3 | Dunia Fantasi | Taman Hiburan |
+  | 4 | Taman Mini Indonesia Indah (TMII) | Taman Hiburan |
+  | 5 | Atlantis Water Adventure | Taman Hiburan |
+
+Berikut adalah hasil rekomendasi nama tempat berdasarkan kategori yang sama.
+
+**Tabel 6. Hasil Rekomendasi _Content-based Filtering_**
+
+  | Place_Name                          | Category |
+  | ----------------------------------- | -------- |
+  | Candi Sewu                          | Budaya   |
+  | Museum Benteng Vredeburg Yogyakarta | Budaya   |
+  | Museum Satria Mandala               | Budaya   |
+  | Kyotoku Floating Market             | Budaya   |
+  | Bandros City Tour                   | Budaya   |
+
+Dari hasil rekomendasi tersebut, terlihat bahwa sistem berhasil menyarankan lokasi-lokasi terkait berdasarkan input 'Monumen Nasional', dengan rekomendasi yang masih dalam kategori serupa, yakni budaya.
+
+2. **_Collaborative Filtering Recommendation_**
+
+Alur kerja pengembangan sistem rekomendasi _collaborative filtering_ terdiri dari tiga tahap utama: data preparation, pembagian data latih dan data validasi, serta konstruksi model dan evaluasi hasil rekomendasi.
+
+- Dalam tahap _data preparation_, fitur `User_Id` dan `Place_Id` pada dataset _ratings_ di-encode menjadi _array_, kemudian dipetakan ulang ke dataset. Hasilnya mengungkapkan total 300 user, 437 tempat, dengan skor _rating_ berkisar dari 1.0 sampai 5.0.
+
+- Proses pembagian dataset dimulai dengan pengacakan data _ratings_, kemudian membaginya menjadi data _training_ dan data validasi dengan perbandingan 80% untuk pelatihan dan 10% untuk validasi.
+
+- Model Development dan Hasil Rekomendasi
+
+Dari model _machine learning_ yang telah dibangun menggunakan _layer embedding_ dan _regularizer_, serta _adam optimizer_, _binary crossentropy loss function_, dan metrik RMSE (_Root Mean Squared Error_), diperoleh hasil pengujian sistem rekomendasi tempat wisata dengan pendekatan _collaborative filtering_.
+
+Hasil rekomendasi menunjukkan bahwa sistem mengambil sampel acak _user_ dan merekomendasikan tempat-tempat yang mendapat penilaian terbaik dari _user_ tersebut.
+
+- Curug Cilengkrang: Cagar Alam
+- Gunung Lalakon: Cagar Alam
+- Taman Hutan Raya Ir. H. Juanda: Cagar Alam
+- Grand Maerakaca: Taman Hiburan
+- Food Junction Grand Pakuwon: Pusat Perbelanjaan
+
+Pada tahap berikutnya, sistem memperlihatkan daftar 10 tempat rekomendasi yang disesuaikan dengan kategori preferensi pengguna acak ini. Dapat diamati bahwa beberapa rekomendasi memiliki kategori yang mirip, contohnya:
+
+- Taman Vanda: Taman Hiburan
+- Taman Sejarah Bandung: Budaya
+- Puspa Iptek Sundial: Taman Hiburan
+- Museum Pendidikan Nasional: Budaya
+- Water Park Bandung Indah: Taman Hiburan
+
 
 ## Evaluation
 
-Dalam proyek ini, metrik evaluasi yang digunakan adalah _Root Mean Squared Error_ (RMSE).
+1. **_Content-based Filtering Recommendation_**
 
-1. **_Root Mean Squared Error_ (RMSE)**
+Tahap evaluasi untuk sistem rekomendasi dengan _content-based filtering_ dapat menggunakan metrik _precision_.
 
-RMSE adalah metrik yang umum digunakan untuk mengukur perbedaan antara nilai yang diprediksi oleh model dan nilai sebenarnya. Secara matematis, RMSE dihitung dengan rumus:
+   $$precision = \frac{TP}{TP + FP}$$
 
-![Rumus-RMSE](https://github.com/user-attachments/assets/e5a01dce-bde4-4027-9e02-ff4e7b51ce79)
+   Di mana:
+   $TP =$ _True Positive_; rekomendasi yang sesuai
+   $FP =$ _False Positive_; rekomendasi yang tidak sesuai
 
-Gambar 2. Rumus _Root Mean Squared Error_
+   Berdasarkan hasil rekomendasi tempat wisata dengan pendekatan _content-based filtering_ dapat dilihat bahwa hasil yang diberikan oleh sistem rekomendasi berdasarkan tempat wisata **Monumen Nasional** dengan kategori **Budaya**, menghasilkan 5 rekomendasi judul tempat wisata yang tepat. Tetapi secara keseluruhan sistem merekomendasikan tempat wisata dengan tepat.
 
-Dimana:
+   $$precision = \frac{5}{5 + 0} = 100\%$$
 
-y  = nilai hasil observasi
-ŷ  = nilai hasil prediksi
-i  = urutan data pada database 
-n  = jumlah data
+   Dengan begitu, diperoleh nilai _precision_ sebesar **100%**.
 
-RMSE memberikan gambaran tentang seberapa besar rata-rata kesalahan prediksi model. Nilai RMSE yang lebih rendah menunjukkan bahwa model memiliki kinerja yang lebih baik dalam memprediksi nilai secara akurat. Dalam konteks sistem rekomendasi film, RMSE digunakan untuk mengukur seberapa akurat model dalam memprediksi _rating_ film yang akan diberikan oleh pengguna.
+2. **_Collaborative Filtering Recommendation_**
 
-**HAsil Evaluasi**
+Tahap evaluasi untuk sistem rekomendasi dengan _collaborative filtering_ menggunakan metrik RMSE (_Root Mean Squared Error_). Rumus untuk mencari nilai RMSE sebagai berikut,
 
-1. Hasil evaluasi proyek menunjukkan bahwa model _clustering_ yang diimplementasikan memiliki kinerja yang cukup baik dalam memprediksi _rating_ film
+   $$RMSE=\sqrt{\sum^{n}_{i=1} \frac{y_i - y\\_pred_i}{n}}$$
 
-2. Nilai RMSE yang diperoleh pada data uji relatif rendah, yang menunjukkan bahwa prediksi _rating_ model cukup akurat.
+   Di mana:
+   $n =$ jumlah _dataset_
+   $i =$ urutan data dalam _dataset_
+   $y_i =$ nilai yang sebenarnya
+   $y_{pred} =$ nilai prediksi terhadap $i$
 
-3. Evaluasi dilakukan dengan membandingkan nilai RMSE dari beberapa variasi model dengan jumlah _cluster_ yang berbeda.
+Nilai RMSE dari sistem rekomendasi dengan pendekatan _collaborative filtering_ adalah 0.2526 pada _Training RMSE_, dan 0.2562 pada _Validation RMSE_. Sedangkan untuk nilai _training loss_ sebesar 0.0638, dan _validation loss_ sebesar 0.0656.
 
-4. Hasil ini menunjukkan bahwa model mampu mengidentifikasi pola preferensi pengguna dengan baik dan memberikan rekomendasi film yang relevan.
-
-Dengan demikian, evaluasi menggunakan RMSE memberikan validasi kuantitatif terhadap efektivitas model rekomendasi dalam memprediksi _rating_ film, yang menjadi dasar penting dalam memberikan rekomendasi yang dipersonalisasi kepada pengguna.
 
 ## Referensi
 
