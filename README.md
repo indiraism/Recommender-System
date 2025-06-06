@@ -80,8 +80,10 @@ Berikut adalah _Exploratory Data Analysis_ (EDA) yang merupakan proses investiga
   | 8   | Coordinate   | 437 non-null   | object  |
   | 9   | Lat          | 437 non-null   | float64 |
   | 10  | Long         | 437 non-null   | float64 |
+  | 11  | Unnamed: 11  | 0 non-null     | float64 |
+  | 12  | Unnamed: 12  | 437 non-null   | int64   |
 
-  tourism_with_id terdiri dari 437 baris dan 10 kolom sebagai berikut:
+  tourism_with_id terdiri dari 437 baris dan 13 kolom sebagai berikut:
 
   - Place_Id: kolom yang menunjukkan id dari setiap tempat wisata.
   - Place_Name: kolom yang menunjukkan nama dari setiap tempat wisata.
@@ -94,6 +96,8 @@ Berikut adalah _Exploratory Data Analysis_ (EDA) yang merupakan proses investiga
   - Coordinate: kolom yang menunjukkan koordinat dari setiap tempat wisata.
   - Lat: kolom yang menunjukkan latitude dari setiap tempat wisata.
   - Long: kolom yang menunjukkan longitude dari setiap tempat wisata.
+  - Unnamed: 11: nilai yang kosong atau tidak konsisten.
+  - Unnamed: 12: nilai yang kosong atau tidak konsisten.
 
 Berikut adalah visualisasi dari dataset tourism_with_id:
 
@@ -145,7 +149,36 @@ Tahap ini bertujuan untuk mempersiapkan data yang akan digunakan untuk proses tr
 
 2. **Pengecekan Missing Values**
 
-   Proses pengecekan data yang hilang atau _missing value_ dilakukan pada masing-masing dataset **tourism_with_id**    dan **tourism_rating**. Berdasarkan hasil pengecekan, ternyata tidak ada data yang hilang dari kedua dataset        tersebut.
+- Mengidentifikasi missing values: `Time_Minutes`, `Unnamed: 11`, dan `Unnamed: 12` pada tourism_with_id.csv mengandung nilai-nilai yang hilang.
+
+- Menangani missing values:
+Untuk kolom `Unnamed: 11` dan `Unnamed: 12`, karena sifatnya yang tidak teridentifikasi dan kemungkinan besar tidak relevan, tindakan yang paling tepat adalah menghapus (drop) kolom-kolom ini. Untuk kolom `Time_Minutes`, yang merupakan fitur penting, bahwa missing values pada `Time_Minutes` diisi dengan nilai median, yang merupakan pendekatan umum untuk menjaga distribusi data dan menghindari hilangnya baris penting.
+
+3. **Mengatasi Data Duplikat**
+
+Menghilangkan baris-baris data yang sama persis untuk mencegah bias dalam analisis dan pelatihan model, serta memastikan setiap entri adalah unik.
+
+4. **Mengubah Tipe Data**
+
+Teknik: Menggunakan metode `astype()`. Kolom `Place_Id`, `User_Id`, dan `Time_Minutes` dikonversi ke tipe data int64 (integer) untuk memastikan konsistensi dan kemudahan operasi numerik. Memastikan bahwa setiap kolom memiliki tipe data yang sesuai untuk operasi atau perhitungan yang akan dilakukan selanjutnya, meningkatkan efisiensi memori, dan mencegah kesalahan.
+
+5. **Melakukan filter berdasarkan jumlah _rating_ atau interaksi:**
+
+Kedua filter ini (`Place_Id` dan `User_Id`) membantu mengatasi masalah sparsity dan meningkatkan kualitas data untuk model berbasis interaksi.
+
+6. **_TF-IDF Vectorizer_**
+
+_TF-IDF Vectorizer_ akan melakukan transformasi teks nama tempat menjadi bentuk angka berupa matriks.
+
+7. **Persiapan Data untuk _Collaborative Filtering_**
+
+Mentransformasi data yang telah bersih dan difilter ke dalam format yang sesuai untuk algoritma _Collaborative _Filtering.
+
+- Membuat Matriks User-Item: Membuat matriks pivot di mana indeks adalah `User_Id`, kolom adalah `Place_Name`, dan nilai-nilainya adalah `Place_Ratings`. Baris dan kolom yang tidak memiliki interaksi akan diisi dengan NaN (nilai kosong).
+
+- Mapping ID: Mengubah `User_Id` dan `Place_Id` ke dalam indeks numerik berurutan. Ini diperlukan karena algoritma _Collaborative Filtering_ biasanya bekerja dengan indeks item dan pengguna yang berurutan, bukan ID asli yang mungkin tidak berurutan atau terlalu besar.
+
+- Mengubah Tipe Data untuk Efisiensi: Mengkonversi tipe data kolom `Place_Ratings` menjadi float32 untuk optimalisasi penggunaan memori dan performa komputasi saat melatih model.
 
 
 ## Modeling
@@ -154,10 +187,6 @@ Dalam pengembangan model machine learning untuk sistem rekomendasi, teknik _cont
 1. _Content-based Filtering Recommendation_
 
 Beberapa tahap yang dilakukan untuk membuat sistem rekomendasi dengan pendekatan _content-based filtering_ adalah _TF-IDF Vectorizer_, _cosine similarity_, dan pengujian sistem rekomendasi.
-
-- **_TF-IDF Vectorizer_**
-
-_TF-IDF Vectorizer_ akan melakukan transformasi teks nama tempat menjadi bentuk angka berupa matriks.
 
 - **_Cosine Similarity_**
 
@@ -251,7 +280,7 @@ Tahap evaluasi untuk sistem rekomendasi dengan _collaborative filtering_ menggun
    $y_i =$ nilai yang sebenarnya
    $y_{pred} =$ nilai prediksi terhadap $i$
 
-Nilai RMSE dari sistem rekomendasi dengan pendekatan _collaborative filtering_ adalah 0.2526 pada _Training RMSE_, dan 0.2562 pada _Validation RMSE_. Sedangkan untuk nilai _training loss_ sebesar 0.0638, dan _validation loss_ sebesar 0.0656.
+Nilai RMSE dari sistem rekomendasi dengan pendekatan _collaborative filtering_ adalah 0.3380 pada _Training RMSE_, dan 0.3494 pada _Validation RMSE_. Sedangkan untuk nilai _training loss_ sebesar 0.6841, dan _validation loss_ sebesar 0.6933.
 
 
 ## Referensi
