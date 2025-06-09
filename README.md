@@ -143,42 +143,22 @@ Berikut adalah visualisasi dari dataset tourism_with_id:
 ## Data Preparation
 Tahap ini bertujuan untuk mempersiapkan data yang akan digunakan untuk proses training model. Di sini dilakukan penghapusan kolom yang tidak diperlukan, pembersihkan data _missing value_, dan melakukan pengecekan dan penghapusan data duplikat.
 
-1. **Menghilangkan Kolom yang Tidak Relevan**
+1. **Menghapus Kolom yang Tidak Diperlukan**
 
-   Untuk dataset **tourism_with_id**, hanya kolom `Place_Id`, `Place_Name`, dan `Category` yang dibutuhkan, ehingga    kolom lainnya dihapus. Sementara pada dataset **tourism_rating**, seluruh kolom diperlukan, sehingga tidak ada      kolom yang dihilangkan.
+   Data yang diperlukan hanya ada pada kolom `Place_Id`, `Place_Name`, dan `Category`, jadi hapus yang lain.
+   Pada dataset tourism_rating, semua kolom diperlukan, jadi tidak ada kolom yang dihapus.
 
-2. **Pengecekan Missing Values**
+3. **Pengecekan _Missing Values_**
 
-- Mengidentifikasi missing values: `Time_Minutes`, `Unnamed: 11`, dan `Unnamed: 12` pada tourism_with_id.csv mengandung nilai-nilai yang hilang.
-
-- Menangani missing values:
-Untuk kolom `Unnamed: 11` dan `Unnamed: 12`, karena sifatnya yang tidak teridentifikasi dan kemungkinan besar tidak relevan, tindakan yang paling tepat adalah menghapus (drop) kolom-kolom ini. Untuk kolom `Time_Minutes`, yang merupakan fitur penting, bahwa missing values pada `Time_Minutes` diisi dengan nilai median, yang merupakan pendekatan umum untuk menjaga distribusi data dan menghindari hilangnya baris penting.
+-Proses pengecekan data yang hilang atau _missing value_ dilakukan pada masing-masing dataset tourism_with_id dan tourism_rating. Berdasarkan hasil pengecekan, ternyata tidak ada data yang hilang dari kedua dataset tersebut.
 
 3. **Mengatasi Data Duplikat**
 
 Menghilangkan baris-baris data yang sama persis untuk mencegah bias dalam analisis dan pelatihan model, serta memastikan setiap entri adalah unik.
 
-4. **Mengubah Tipe Data**
-
-Teknik: Menggunakan metode `astype()`. Kolom `Place_Id`, `User_Id`, dan `Time_Minutes` dikonversi ke tipe data int64 (integer) untuk memastikan konsistensi dan kemudahan operasi numerik. Memastikan bahwa setiap kolom memiliki tipe data yang sesuai untuk operasi atau perhitungan yang akan dilakukan selanjutnya, meningkatkan efisiensi memori, dan mencegah kesalahan.
-
-5. **Melakukan filter berdasarkan jumlah _rating_ atau interaksi:**
-
-Kedua filter ini (`Place_Id` dan `User_Id`) membantu mengatasi masalah sparsity dan meningkatkan kualitas data untuk model berbasis interaksi.
-
 6. **_TF-IDF Vectorizer_**
 
 _TF-IDF Vectorizer_ akan melakukan transformasi teks nama tempat menjadi bentuk angka berupa matriks.
-
-7. **Persiapan Data untuk _Collaborative Filtering_**
-
-Mentransformasi data yang telah bersih dan difilter ke dalam format yang sesuai untuk algoritma _Collaborative _Filtering.
-
-- Membuat Matriks User-Item: Membuat matriks pivot di mana indeks adalah `User_Id`, kolom adalah `Place_Name`, dan nilai-nilainya adalah `Place_Ratings`. Baris dan kolom yang tidak memiliki interaksi akan diisi dengan NaN (nilai kosong).
-
-- Mapping ID: Mengubah `User_Id` dan `Place_Id` ke dalam indeks numerik berurutan. Ini diperlukan karena algoritma _Collaborative Filtering_ biasanya bekerja dengan indeks item dan pengguna yang berurutan, bukan ID asli yang mungkin tidak berurutan atau terlalu besar.
-
-- Mengubah Tipe Data untuk Efisiensi: Mengkonversi tipe data kolom `Place_Ratings` menjadi float32 untuk optimalisasi penggunaan memori dan performa komputasi saat melatih model.
 
 
 ## Modeling
@@ -186,7 +166,7 @@ Dalam pengembangan model machine learning untuk sistem rekomendasi, teknik _cont
 
 1. _Content-based Filtering Recommendation_
 
-Beberapa tahap yang dilakukan untuk membuat sistem rekomendasi dengan pendekatan _content-based filtering_ adalah _TF-IDF Vectorizer_, _cosine similarity_, dan pengujian sistem rekomendasi.
+Beberapa tahap yang dilakukan untuk membuat sistem rekomendasi dengan pendekatan _content-based filtering_ adalah _cosine similarity_, dan pengujian sistem rekomendasi.
 
 - **_Cosine Similarity_**
 
@@ -233,7 +213,7 @@ Alur kerja pengembangan sistem rekomendasi _collaborative filtering_ terdiri dar
 
 Dari model _machine learning_ yang telah dibangun menggunakan _layer embedding_ dan _regularizer_, serta _adam optimizer_, _binary crossentropy loss function_, dan metrik RMSE (_Root Mean Squared Error_), diperoleh hasil pengujian sistem rekomendasi tempat wisata dengan pendekatan _collaborative filtering_.
 
-Hasil rekomendasi menunjukkan bahwa sistem mengambil sampel acak _user_ dan merekomendasikan tempat-tempat yang mendapat penilaian terbaik dari _user_ tersebut.
+Berdasarkan hasil rekomendasi tempat di atas, dapat dilihat bahwa sistem rekomendasi mengambil pengguna acak, lalu dilakukan pencarian tempat dengan _rating_ terbaik tersebut.
 
 - Curug Cilengkrang: Cagar Alam
 - Gunung Lalakon: Cagar Alam
@@ -241,13 +221,18 @@ Hasil rekomendasi menunjukkan bahwa sistem mengambil sampel acak _user_ dan mere
 - Grand Maerakaca: Taman Hiburan
 - Food Junction Grand Pakuwon: Pusat Perbelanjaan
 
-Pada tahap berikutnya, sistem memperlihatkan daftar 10 tempat rekomendasi yang disesuaikan dengan kategori preferensi pengguna acak ini. Dapat diamati bahwa beberapa rekomendasi memiliki kategori yang mirip, contohnya:
+Selanjutnya, sistem akan menampilkan 10 daftar tempat yang direkomendasikan berdasarkan kategori yang dimiliki terhadap data pengguna acak tadi. Dapat dilihat bahwa sistem merekomendasikan beberapa tempat dengan kategori yang sama, seperti:
 
 - Taman Vanda: Taman Hiburan
 - Taman Sejarah Bandung: Budaya
 - Puspa Iptek Sundial: Taman Hiburan
 - Museum Pendidikan Nasional: Budaya
 - Water Park Bandung Indah: Taman Hiburan
+- Curug Anom: Cagar Alam
+- Taman Film: Budaya
+- Museum Nike Ardilla: Budaya
+- Sanghyang Heuleut: Cagar Alam
+-  Masjid Al-Imtizaj: Tempat Ibadah
 
 
 ## Evaluation
